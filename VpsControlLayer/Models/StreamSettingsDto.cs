@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -6,6 +7,7 @@ namespace VpsControlLayer.Models;
 /// <summary>
 /// Как будут данные дергатся в сети
 /// </summary>
+[SuppressMessage("Design", "CA1040:Avoid empty interfaces", Justification = "Класс нужен как DTO, абстрактность не требуется")]
 public class StreamSettingsDto
 {
     /// <summary>
