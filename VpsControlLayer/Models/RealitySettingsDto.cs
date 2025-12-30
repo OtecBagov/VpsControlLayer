@@ -42,7 +42,7 @@ public class RealitySettingsDto
     /// PublicKey вычисляется с помощью секрета и отправляется клиенту
     /// </summary>
     [JsonPropertyName("publicKey")]
-    public string[]? PublicKey {get; set; }
+    public string? PublicKey {get; set; }
     
     [JsonExtensionData]
     public Dictionary<string, JsonElement>? Extra {get; set; }

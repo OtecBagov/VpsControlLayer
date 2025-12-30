@@ -1,16 +1,21 @@
-var builder = WebApplication.CreateBuilder(args);
+using System.CommandLine;
+using Microsoft.Extensions.DependencyInjection;
+using VpsControlLayer.Application;
+using VpsControlLayer.CLI;
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+namespace VpsControlLayer;
 
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+public static class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    public static async Task<int> Main(string[] args)
+    {
+        // Настройка DI контейнера
+        var services = new ServiceCollection();
+        services.AddApplication();
+        var serviceProvider = services.BuildServiceProvider();
+
+        // Создание и запуск CLI
+        var rootCommand = CommandRegistry.CreateRootCommand(serviceProvider);
+        return await rootCommand.InvokeAsync(args);
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.Run();
